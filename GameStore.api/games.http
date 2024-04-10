@@ -1,0 +1,28 @@
+GET http://localhost:5260/games 
+
+###
+GET http://localhost:5260/games/5
+
+###
+POST http://localhost:5260/games
+Content-Type: application/json
+
+{
+    "name": "World Of Warcraft",
+    "genre": "MMO",
+    "price": 19.99,
+    "releaseDate": "2017-03-12"
+}
+
+###
+PUT http://localhost:5260/games/3
+Content-Type: application/json
+
+{
+    "name": "Legend of Zelda, Majoras Mask",
+    "genre": "RPG",
+    "price": 29.99,
+    "releaseDate": "2017-03-12"
+}
+
+DELETE http://localhost:5260/games/4
