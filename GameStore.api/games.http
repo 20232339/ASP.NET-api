@@ -11,7 +11,7 @@ Content-Type: application/json
     "name": "World Of Warcraft",
     "genre": "MMO",
     "price": 19.99,
-    "releaseDate": "2017-03-12"
+    "releaseDate": "2004-03-12"
 }
 
 ###
@@ -25,4 +25,5 @@ Content-Type: application/json
     "releaseDate": "2017-03-12"
 }
 
-DELETE http://localhost:5260/games/4
+###
+DELETE http://localhost:5260/games/1
