@@ -1,4 +1,6 @@
+using GameStore.api.Data;
 using GameStore.api.Dtos;
+using GameStore.api.Entities;
 using System.Text.Json;
 
 namespace GameStore.api.Endpoints;
@@ -47,18 +49,28 @@ public static RouteGroupBuilder MapGamesEndpoints(this WebApplication app)
 
 
 // POST: /games
-group.MapPost("/", (CreateGameDto newGame) => {
+group.MapPost("/", (CreateGameDto newGame, GamesStoreContext dbContext) => {
 
-    GameDto game = new(
-        games.Count + 1,
-        newGame.Name,
-        newGame.Genre,
-        newGame.Price,
-        newGame.ReleaseDate);
+        Game game = new(){
+            Name = newGame.Name,
+            Genre = dbContext.Genres.Find(newGame.GenreId),
+            GenreId = newGame.GenreId,
+            Price = newGame.Price,
+            ReleaseDate = newGame.ReleaseDate
+        };
+        
+        dbContext.Games.Add(game);
+        dbContext.SaveChanges();
 
-        games.Add(game);
+        GameDto gameDto = new GameDto(
+            game.Id,
+            game.Name,
+            game.Genre!.Name,
+            game.Price,
+            game.ReleaseDate
+        );
 
-        return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
+        return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, gameDto);
 }).WithParameterValidation();
 
 

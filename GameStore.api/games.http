@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "name": "World Of Warcraft",
-    "genre": "MMO",
+    "GenreId": 4,
     "price": 19.99,
     "releaseDate": "2004-03-12"
 }
